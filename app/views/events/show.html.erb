@@ -3,6 +3,10 @@
     <div class="col-12 col-md-8">
       <div class="card mb-3">
         <div class="card-body">
+        <p class="card-text">
+        <% if @event.only_woman %>
+          <%= "女性限定" %>
+        <% end %></p>
           <div class="d-flex align-items-center">
             <div class="p-3">
               <h5 class="m-0">
@@ -92,7 +96,8 @@
                               method: :delete,
                               data: { confirm: 'キャンセルします' }
                   %>
-                <% else %>
+                <% elsif %>
+                <% !@event.only_woman || (@event.only_woman && current_user.woman?) %>
                   <%= link_to 'このもくもく会に参加する',
                               event_attendance_url(@event),
                               class: 'btn btn-primary',
